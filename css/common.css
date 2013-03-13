@@ -1,0 +1,24 @@
+html { width:100%; height:100%; }
+body, input, textarea, button { width:100%; height:100%; color:#333; font-family:"Microsoft YaHei", "微软雅黑", sans-serif; background-color:#ccc; }
+a { text-decoration:none; color:#143d98; cursor:pointer; }
+a:hover,
+a:active { text-decoration:underline; }
+.googleBlue { color:#143d98; }
+.googleRed { color:#c61800; }
+.googleYellow { color:#efba00; }
+.googleGreen { color:#1ba823; }
+.formRow { margin:26px 0; height:34px; font-size:16px; }
+.formRow label { display:block; float:left; width:100px; text-align:right; line-height:34px; }
+.formRow input[type="text"],
+.formRow input[type="password"] { margin-left:10px; height:16px; font-size:16px; line-height:16px; padding:8px; width:200px; border:1px solid #ccc; border-radius:2px; background-color:#f2f2f2; box-shadow:0 0 1px rgba(0, 0, 0, 0.3); }
+.formRow input[type="text"]:hover,
+.formRow input[type="password"]:hover { border-color:#999; box-shadow:0 0 1px rgba(0, 0, 0, 0.5); }
+.formRow input[type="text"]:focus,
+.formRow input[type="password"]:focus { border-color:#999; background-color:#fff; box-shadow:1px 1px 2px rgba(0, 0, 0, 0.3) inset; }
+.formRow input[type="submit"] { height:32px; margin-left:110px; font-size:16px; line-height:16px; padding:8px; width:80px; border:1px solid #199c20; border-radius:2px; color:#fff; background-color:#1db526; background:-webkit-gradient(linear, 0 0, 0 100%, from(#1db526), to(#1ba823)); box-shadow:0 0 2px rgba(0, 0, 0, 0.3); }
+.formRow input[type="submit"]:focus,
+.formRow input[type="submit"]:hover { border-color:#178f1e; background-color:#199c20; background:-webkit-gradient(linear, 0 0, 0 100%, from(#1ba823), to(#199c20)); box-shadow:0 0 2px rgba(0, 0, 0, 0.5); }
+.formRow input[type="submit"]:active { border-color:#178f1e; background-color:#1ba823; background:-webkit-gradient(linear, 0 0, 0 100%, from(#199c20), to(#1ba823)); box-shadow:1px 1px 3px rgba(0, 0, 0, 0.3) inset; }
+.formMsg { color:#c61800; margin-left:10px; font-size:16px; line-height:34px; }
+.footer { position:absolute; bottom:0; width:100%; text-align:center; color:#e6e6e6; }
+.footer a { color:#e6e6e6; }

@@ -1,0 +1,5 @@
+#pg_sign h1 { position:relative; top:-36px; font-size:50px; height:50px; line-height:50px; text-align:center; text-shadow:1px 1px 5px rgba(0, 0, 0, 0.5) }
+#pg_sign .middle { position:relative; height:300px; top:50%; margin-top:-150px; background-color:#e6e6e6; box-shadow:0 0 10px rgba(0, 0, 0, 0.1) }
+#pg_sign .center { width:800px; margin:0 auto; }
+#signInForm { margin-left:160px; }
+#signInForm 
