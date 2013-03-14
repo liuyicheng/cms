@@ -31,40 +31,76 @@
                 }, 'json');
             }
         },
-        getCodeList: function(filter, fun) {
-            var out;
-            $.post('post.php', {
-                'type': 'getCodeList',
-                'filter': filter
-            }, fun, 'json');
+        getData: {
+            getCodeList: function(filter, fun) {
+                $.post('post.php', {
+                    'type': 'getCodeList',
+                    'filter': filter
+                }, fun, 'json');
+            },
+            getUserList: function(fun) {
+                $.post('post.php', {
+                    'type': 'getUserList'
+                }, fun, 'json');
+            },
+            getLanguageList: function(fun) {
+                $.post('post.php', {
+                    'type': 'getLanguageList'
+                }, fun, 'json');
+            },
+            getProjectList: function(fun) {
+                $.post('post.php', {
+                    'type': 'getProjectList'
+                }, fun, 'json');
+            },
+            getCodePage: function(code_ID, fun) {
+                $.post('post.php', {
+                    'type': 'getCodePage',
+                    'code_ID': code_ID
+                }, fun, 'json');
+            }
         },
-        form: {
-            initForm: function($form) {
-                var asdf = $form.find('.select').append(function() {
+        init: {
+            initSearchForm: function($form) {
+                $form.find('.select').append(function() {
                     return '<label for="' + $(this).children('input').attr('id') + '"></label>';
-                }).append(function() {
-                    var $input = $(this).children('input'),
+                }).each(function() {
+                    var $this = $(this),
+                        $input = $this.children('input'),
                         option = '<div class="option"><div class="none">' + $input.attr('placeholder') + '</div>',
-                        data = JSON.parse($input.attr('data'));
-                    for ( var i = 0; i < data.length; i++ ) {
-                        option += '<div data-id="' + data[i].id + '">' + data[i].name + '</div>'
+                        appendToSelect = function(data) {
+                            for ( var i = 0; i < data.length; i++ ) {
+                                option += '<div data-id="' + data[i][0] + '">' + data[i][1] + '</div>'
+                            }
+                            option += '</div>';
+                            $(option).width($input.width() + 16).click(function(event) {
+                                var $target = $(event.target);
+                                if ( $target.hasClass('none') ) {
+                                    $input.attr('data-id', '').val('').removeClass('active').nextAll('.option').hide();
+                                } else {
+                                    $input.attr('data-id', $target.attr('data-id')).val($target.html()).removeClass('active').nextAll('.option').fadeOut(100);
+                                }
+                            }).appendTo($this);
+                        };
+                    switch ($input.attr('id')) {
+                        case 'project':
+                            $.cms.getData.getProjectList(appendToSelect);
+                        break;
+                        case 'language':
+                            $.cms.getData.getLanguageList(appendToSelect);
+                        break;
+                        case 'author':
+                            $.cms.getData.getUserList(appendToSelect);
+                        break;
                     }
-                    option += '</div>';
-                    return $(option).width($input.width() + 16).click(function(event) {
-                        var $target = $(event.target);
-                        if ( $target.hasClass('none') ) {
-                            $input.attr('data-id', '').val('').removeClass('active').nextAll('.option').hide();
+                    $input.click(function() {
+                        if ( !$(this).hasClass('active') ) {
+                            $('.active').removeClass('active').nextAll('.option').fadeOut(100);
+                            $(this).addClass('active').nextAll('.option').slideDown(100);
                         } else {
-                            $input.attr('data-id', $target.attr('data-id')).val($target.html()).removeClass('active').nextAll('.option').fadeOut(100);
+                            $(this).removeClass('active').nextAll('.option').fadeOut(100);
                         }
                     });
-                }).children('input').click(function() {
-                    if ( !$(this).hasClass('active') ) {
-                        $('.active').removeClass('active').nextAll('.option').fadeOut(100);
-                        $(this).addClass('active').nextAll('.option').slideDown(100);
-                    } else {
-                        $(this).removeClass('active').nextAll('.option').fadeOut(100);
-                    }
                 });
                 $('body').click(function(event) {
                     if ( !$(event.target).parents('.select').length ) {
@@ -72,16 +108,43 @@
                     }
                 });
                 $form.find('.inputText').width($form.width() - 602);
+            },
+            initSignForm: function($form) {
                 $form.find('input').bind("keypress change", function() {
                     $(this).next('.formMsg').html('');
                 });
             },
+            initMenu: function(data) {
+                var $menu = $('.menu');
+                    list = '<ul>';
+                $menu.html();
+                for ( var i = 0; i < data.length; i++ ) {
+                    if ( data[i].code_ID === 1 ) {
+                        list = '<li data-id="' + data[i].code_ID + '">' + data[i].code_title + '</li>' + list;
+                    } else {
+                        list += '<li data-id="' + data[i].code_ID + '">' + data[i].code_title + '</li>'
+                    }
+                };
+                list += '</ul>';
+                $menu.append(list).delegate('li', 'click', function() {
+                    var $this = $(this);
+                    $.cms.getData.getCodePage($this.attr('data-id'), function(data) {
+                        $.cms.init.initMain(data);
+                        $menu.find('li').removeClass('on');
+                        $this.addClass('on');
+                    });
+                }).find('li:first').click();
+            },
+            initMain: function(data) {
+                $('.main').html(data.code_title + '<br />' + data.code_summary);
+            }
+        },
+        form: {
             showFormMsg: function($form, data) {
                 for ( var i in data ) {
                     $form.find('#' + i).select().next('.formMsg').html(data[i]);
                 }
             },
-
         }
     };
 })(jQuery);

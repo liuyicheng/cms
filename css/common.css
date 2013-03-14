@@ -7,9 +7,10 @@ a:active { text-decoration:underline; }
 .googleRed { color:#c61800; }
 .googleYellow { color:#efba00; }
 .googleGreen { color:#1ba823; }
+.clear { clear:both; }
 h1 { position:relative; top:-40px; font-size:50px; height:50px; line-height:50px; text-align:left; text-shadow:1px 1px 5px rgba(0, 0, 0, 0.5) }
 .content { height:auto; width:auto; margin-top:70px; background-color:#e6e6e6; box-shadow:0 0 10px rgba(0, 0, 0, 0.1) }
-.center { width:auto; min-height:600px; max-width:1600px; margin:0 auto; padding:0 30px; }
+.center { width:auto; max-width:1600px; margin:0 auto; padding:0 30px 30px 30px; }
 .footer { margin:10px 0; width:100%; text-align:center; color:#e6e6e6; }
 .footer a { color:#e6e6e6; }
 .formRow { margin:26px 0; height:34px; font-size:16px; }
@@ -44,3 +45,9 @@ h1 { position:relative; top:-40px; font-size:50px; height:50px; line-height:50px
 .option div { height:18px; line-height:18px; padding:8px; color:#545454; }
 .option div:hover { background:#e6e6e6; color:#333; }
 .formMsg { margin-left:10px; font-size:16px; line-height:34px; }
+.menu { float:left; position:relative; margin:30px 0 20px 20px; width:200px; }
+.main { margin:30px 20px 20px 219px; padding:30px 40px; background:#fff; min-height:1000px; width:auto; border:1px solid #ccc; box-shadow:0 0 10px rgba(0, 0, 0, 0.1); }
+.menu li { position;relative; padding:8px; cursor:pointer; color:#999; }
+.menu li:hover { background-color:#ccc; color:#666; }
+.menu li.on { background-color:#fff; color:#333; border:1px solid #ccc; border-right:0; box-shadow:0 0 10px rgba(0, 0, 0, 0.1); }
+.menu li.on:after { content:""; position:absolute; width:5px; background:#fff; height:40px; top:1px; right:-5px; }

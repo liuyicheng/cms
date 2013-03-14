@@ -1,10 +1,10 @@
 $(function() {
-    $.cms.form.initForm($('#searchForm'));
+    $.cms.init.initSearchForm($('#searchForm'));
     $('#signOut').click(function(event) {
         event.preventDefault();
         $.cms.sign.postSignOut();
     });
-    $.cms.getCodeList('default', function(data) {
-        console.log(data);
+    $.cms.getData.getCodeList('default', function(data) {
+        $.cms.init.initMenu(data);
     });
 });
