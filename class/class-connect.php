@@ -30,7 +30,7 @@ class Connect {
     public function getCodeList($filter) {
         if ( $filter === "default" ) {
             $mysql = $this->mysql;
-            $result = $mysql->query("select cms_code.code_ID, cms_code.code_title, cms_code.code_language, cms_code.code_summary, cms_project.project_ID, cms_project.project_title from cms_code inner join cms_project on cms_code.code_projectid=cms_project.project_ID order by cms_code.code_title desc limit 0,20");
+            $result = $mysql->query("select code_ID, code_title, code_language from cms_code order by code_updatetime desc limit 0,20");
             return json_encode($mysql->fetchall($result));
         }
     }

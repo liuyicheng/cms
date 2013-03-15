@@ -1,0 +1,45 @@
+<input id="returnIndex" class="extendButton" type="button" value="返回" />
+<form id="editForm" action="" method="post" >
+    <div class="formRow">
+        <label for="title">标题（函数名或类名）：</label>
+        <input id="title" name="title" type="text" placeholder="标题（函数名或类名）" />
+        <span class="formMsg googleRed"></span>
+    </div>
+    <div class="formRow">
+        <label for="project">所属项目：</label>
+        <input id="project" name="project" type="text" placeholder="所属项目" />
+        <span class="formMsg googleRed"></span>
+    </div>
+    <div class="formRow">
+        <label for="language">开发语言：</label>
+        <input id="language" name="language" type="text" placeholder="开发语言" />
+        <span class="formMsg googleRed"></span>
+    </div>
+    <div class="formRow">
+        <label for="summary">概要：</label>
+        <input id="summary" name="summary" type="text" placeholder="概要" />
+        <span class="formMsg googleRed"></span>
+    </div>
+    <div class="formRow">
+        <label for="location">所属文件：</label>
+        <input id="location" name="location" type="text" placeholder="所属文件" />
+        <span class="formMsg googleRed"></span>
+    </div>
+    <div class="formRow">
+        <label for="source">源码：</label>
+        <textarea id="source" name="source" placeholder="源码"></textarea>
+    </div>
+    <div class="formRow">
+        <label for="description">正文（介绍，例子等）：</label>
+        <div class="description">
+            <script  id="editor" type="text/plain">应该包括：<ol><li>详细介绍（输入输出）</li><li>示例</li><li>注意事项</li></ol></script>
+        </div>
+    </div>
+    <div class="formRow">
+        <input id="addNew" name="addNew" type="submit" value="添加" />
+    </div>
+</form>
+<!--<div>
+    <script  id="editor" type="text/plain">这里可以书写，编辑器的初始内容</script>
+</div>
+<button>获得内容</button>-->

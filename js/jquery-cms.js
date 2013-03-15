@@ -70,7 +70,9 @@
                         option = '<div class="option"><div class="none">' + $input.attr('placeholder') + '</div>',
                         appendToSelect = function(data) {
                             for ( var i = 0; i < data.length; i++ ) {
-                                option += '<div data-id="' + data[i][0] + '">' + data[i][1] + '</div>'
+                                if ( data[i][1] != '' ) {
+                                    option += '<div data-id="' + data[i][0] + '">' + data[i][1] + '</div>'
+                                }
                             }
                             option += '</div>';
                             $(option).width($input.width() + 16).click(function(event) {
@@ -116,16 +118,16 @@
             },
             initMenu: function(data) {
                 var $menu = $('.menu');
-                    list = '<ul>';
+                    list = '';
                 $menu.html();
                 for ( var i = 0; i < data.length; i++ ) {
-                    if ( data[i].code_ID === 1 ) {
+                    if ( data[i].code_ID == 1 ) {
                         list = '<li data-id="' + data[i].code_ID + '">' + data[i].code_title + '</li>' + list;
                     } else {
                         list += '<li data-id="' + data[i].code_ID + '">' + data[i].code_title + '</li>'
                     }
                 };
-                list += '</ul>';
+                list = '<ul>' + list + '</ul>';
                 $menu.append(list).delegate('li', 'click', function() {
                     var $this = $(this);
                     $.cms.getData.getCodePage($this.attr('data-id'), function(data) {
@@ -136,7 +138,20 @@
                 }).find('li:first').click();
             },
             initMain: function(data) {
-                $('.main').html(data.code_title + '<br />' + data.code_summary);
+                if ( !$('#jquerySnippetCss').length ) {
+                    $("<link/>", {
+                        id: "jquerySnippetCss",
+                        rel: "stylesheet",
+                        type: "text/css",
+                        href: "css/jquery.snippet.min.css"
+                    }).appendTo("head");
+                }
+                if ( !$('#jquerySnippetJs').length ) {
+                    $.getScript('js/jquery.snippet.min.js', function() {
+                        $('pre').snippet('javascript', { style: 'vim', menu: false });
+                    });
+                }
+                $('.main').html('<pre>' + data.code_source + '</pre>');
             }
         },
         form: {
