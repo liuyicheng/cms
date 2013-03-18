@@ -60,6 +60,22 @@
                 }, fun, 'json');
             }
         },
+        setData: {
+            addCodePage: function(addNewData) {
+                $.post('post.php', {
+                    type: 'addCodePage',
+                    code_title: addNewData.title,
+                    code_project: addNewData.project,
+                    code_language: addNewData.language,
+                    code_summary: addNewData.summary,
+                    code_location: addNewData.location,
+                    code_source: addNewData.source,
+                    code_description: addNewData.description
+                }, function(data) {
+                    alert(data);
+                });
+            }
+        },
         init: {
             initSearchForm: function($form) {
                 $form.find('.select').append(function() {

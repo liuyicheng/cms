@@ -58,5 +58,5 @@ h1 { position:relative; top:-40px; font-size:50px; height:50px; line-height:50px
 .main { position:relative; margin:30px 20px 20px 220px; padding:30px 40px; background:#fff; min-height:1000px; width:auto; border:1px solid #ccc; box-shadow:0 0 10px rgba(0, 0, 0, 0.1); z-index:10; }
 .menu li { position:relative; padding:8px; cursor:pointer; color:#999; }
 .menu li:hover { background-color:#ccc; color:#666; }
-.menu li.on { background-color:#fff; color:#333; border:1px solid #ccc; border-right:0; box-shadow:0 0 10px rgba(0, 0, 0, 0.1); }
+.menu li.on { background-color:#fff; height:21px; line-height:21px; color:#333; border:1px solid #ccc; border-right:0; box-shadow:0 0 10px rgba(0, 0, 0, 0.1); }
 .menu li.on:after { content:""; position:absolute; width:5px; background:#fff; height:37px; top:0; right:-1px; z-index:20; }

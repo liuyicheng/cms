@@ -47,6 +47,16 @@ if ( isset($_POST["type"]) ) {
             echo $connect->getCodePage($code_ID);
             // TODO 显示代码页面还没做完
         break;
+        case "addCodePage":
+            $code_title = isset($_POST["code_title"]) ? $_POST["code_title"] : "";
+            $code_project = isset($_POST["code_project"]) ? $_POST["code_project"] : "";
+            $code_language = isset($_POST["code_language"]) ? $_POST["code_language"] : "";
+            $code_summary = isset($_POST["code_summary"]) ? $_POST["code_summary"] : "";
+            $code_location = isset($_POST["code_location"]) ? $_POST["code_location"] : "";
+            $code_source = isset($_POST["code_source"]) ? $_POST["code_source"] : "";
+            $code_description = isset($_POST["code_description"]) ? $_POST["code_description"] : "";
+            echo $connect->addCodePage($code_title, $code_project, $code_language, $code_summary, $code_location, $code_source, $code_description);
+        break;
     }
 }
 ?>

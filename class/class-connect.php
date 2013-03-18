@@ -104,6 +104,20 @@ class Connect {
         return json_encode($mysql->fetcharray($result));
     }
     /**
+     * 方法: addCodePage
+     * 功能: 插入一个代码页面
+     * 参数: 很多
+     * 说明: 将数据插入cms_code表
+     *       TODO 临时写的，还需修改
+     */
+    public function addCodePage($code_title, $code_project, $code_language, $code_summary, $code_location, $code_source, $code_description) {
+        $code_source = addslashes($code_source);
+        $code_description = htmlentities($code_description);
+        $mysql = $this->mysql;
+        //return $mysql->query("insert into cms_code (code_title, code_projectid, code_language, code_summary, code_location, code_authorid, code_source, code_description) values ('$code_title', '1', '$code_language', '$code_summary', '$code_location', '1', '$code_source', '$code_description')");
+        return $mysql->query("insert into cms_code (code_title, code_projectid, code_language, code_summary, code_location, code_authorid, code_source, code_description) values ('$code_title', '1', '$code_language', '$code_summary', '$code_location', '1', '$code_source', '$code_description')");
+    }
+    /**
      * 方法: __destruct
      * 功能: 析构函数
      * 参数: 无

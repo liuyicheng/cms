@@ -13,4 +13,17 @@ $(function() {
     $('#returnIndex').click(function() {
         window.location.href = 'index.php';
     });
+    $('#addNew').click(function() {
+        event.preventDefault();
+        var addNewData = {
+            title: $('#title').val(),
+            project: $('#project').val(),
+            language: $('#language').val(),
+            summary: $('#summary').val(),
+            location: $('#location').val(),
+            source: $('#source').val(),
+            description: UE.getEditor('editor').getContent()
+        }
+        $.cms.setData.addCodePage(addNewData);
+    });
 });
