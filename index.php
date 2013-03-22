@@ -4,8 +4,8 @@
  */
 include_once("init.php");
 Printt::printTplHeader("index");
+Printt::printTpl("sidebar", "");
 Printt::printTpl("search", "");
-Printt::printTpl("menu", "");
 Printt::printTpl("main", "");
 Printt::printTpl("index", "");
 Printt::printTplFooter("index");

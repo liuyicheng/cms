@@ -29,8 +29,11 @@ if ( isset($_POST["type"]) ) {
             echo json_encode(array("status" => "success"));
         break;
         case "getCodeList":
-            $filter = isset($_POST["filter"]) ? $_POST["filter"] : "";
-            echo $connect->getCodeList($filter);
+            $language = isset($_POST["language"]) ? $_POST["language"] : "";
+            $project = isset($_POST["project"]) ? $_POST["project"] : "";
+            $author = isset($_POST["author"]) ? $_POST["author"] : "";
+            $keywords = isset($_POST["keywords"]) ? $_POST["keywords"] : "";
+            echo $connect->getCodeList($language, $project, $author, $keywords);
         break;
         case "getUserList":
             echo $connect->getUserList();

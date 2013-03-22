@@ -1,13 +1,18 @@
 $(function() {
-    $.cms.init.initSearchForm($('#searchForm'));
     $('#signOut').click(function(event) {
         event.preventDefault();
-        $.cms.sign.postSignOut();
+        CMS.sign.postSignOut();
     });
     $('#addNewCodeButton').click(function() {
         window.location.href='edit.php';
     });
-    $.cms.getData.getCodeList('default', function(data) {
-        $.cms.init.initMenu(data);
+    $('#searchForm').submit(function(event) {
+        event.preventDefault();
+        $('#searchInput').blur();
+        CMS.filter.keywords = $('#searchInput').val();
+        CMS.init.initMain();
     });
+    CMS.init.initSearch();
+    CMS.init.initSidebar();
+    CMS.init.initMain();
 });

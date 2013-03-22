@@ -50,12 +50,36 @@ class Connect {
      * 说明: 可以设置过滤器，默认为所有代码按时间排序结果，最多只返回30条结果
      *       TODO 过滤器部分还没做好
      */
-    public function getCodeList($filter) {
-        if ( $filter === "default" ) {
-            $mysql = $this->mysql;
-            $result = $mysql->query("select code_ID, code_title, code_language from cms_code order by code_updatetime desc limit 0, 30");
-            return json_encode($mysql->fetchall($result));
+    public function getCodeList($language, $project, $author, $keywords) {
+        $mysql = $this->mysql;
+        $query = "select code_ID, code_title, code_language, code_project, code_author, code_summary, code_description from cms_code ";
+        if ( $language || $project || $author || $keywords ) {
+            $query .= " where ";
+            if ( $language ) {
+                $query .= " code_language = '" . $language . "' ";
+            }
+            if ( $project ) {
+                if ( $language ) {
+                    $query .= " and ";
+                }
+                $query .= " code_project = '" . $project . "' ";
+            }
+            if ( $author ) {
+                if ( $language || $project ) {
+                    $query .= " and ";
+                }
+                $query .= " code_author = '" . $author . "' ";
+            }
+            if ( $keywords ) {
+                if ( $language || $project || $author ) {
+                    $query .= " and ";
+                }
+                $query .= " ( code_title like '%" . $keywords . "%' or code_summary like '%" . $keywords . "%' or code_description like '%" . $keywords . "%' ) ";
+            }
         }
+        $query .= " order by code_updatetime desc limit 0, 10";
+        $result = $mysql->query($query);
+        return json_encode($mysql->fetchall($result));
     }
     /**
      * 方法: getUserList
@@ -65,7 +89,7 @@ class Connect {
      */
     public function getUserList() {
         $mysql = $this->mysql;
-        $result = $mysql->query("select user_ID, user_nickname from cms_user");
+        $result = $mysql->query("select code_author from cms_code group by code_author");
         return json_encode($mysql->fetchall($result));
     }
     /**
@@ -77,7 +101,7 @@ class Connect {
      */
     public function getLanguageList() {
         $mysql = $this->mysql;
-        $result = $mysql->query("select count(*) as num, code_language from cms_code group by code_language");
+        $result = $mysql->query("select code_language from cms_code group by code_language");
         return json_encode($mysql->fetchall($result));
     }
     /**
@@ -88,7 +112,7 @@ class Connect {
      */
     public function getProjectList() {
         $mysql = $this->mysql;
-        $result = $mysql->query("select project_ID, project_title from cms_project");
+        $result = $mysql->query("select code_project from cms_code group by code_project");
         return json_encode($mysql->fetchall($result));
     }
     /**

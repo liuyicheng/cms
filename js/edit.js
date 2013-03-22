@@ -24,6 +24,6 @@ $(function() {
             source: $('#source').val(),
             description: UE.getEditor('editor').getContent()
         }
-        $.cms.setData.addCodePage(addNewData);
+        CMS.setData.addCodePage(addNewData);
     });
 });

@@ -1,7 +1,7 @@
 $(function() {
-    $.cms.init.initSignForm($('#signInForm'));
+    CMS.init.initSignForm($('#signInForm'));
     $('#signInForm').submit(function(event) {
         event.preventDefault();
-        $.cms.sign.postSignIn($('#signInForm'));
+        CMS.sign.postSignIn($('#signInForm'));
     });
 });
