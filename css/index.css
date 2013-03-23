@@ -1,3 +1,4 @@
+#pg_index .top { background-color:#666; height:0; }
 #pg_index .inputButton { margin-left:0; }
 
 #pg_index .sidebar { float:left; width:130px; margin-left:20px; }
@@ -7,6 +8,8 @@
 #pg_index .sidebar span:hover,
 #pg_index .sidebar span.on:hover { background-color:#fff; }
 #pg_index .sidebar span.on { background-color:#ccc; color:#333; }
+#pg_index .sidebar .other { padding:0; }
+#pg_index .sidebar .other input { height:16px; line-height:16px; font-size:14px; width:116px; padding:6px; }
 
 #pg_index .search { margin-left:180px; }
 #pg_index .search .inputText { margin-right:30px; }
@@ -43,3 +46,6 @@
 #pg_index .codePage .comment p { font-size:14px; text-indent:0; }
 #pg_index .codePage .comment .time { display:block; color:#999; font-size:12px; }
 #pg_index .codePage .comment li { margin:20px 0; }
+
+#pg_index .codePage .comment textarea { width:400px; height:80px; margin-right:20px; }
+#pg_index .codePage .comment input { position:absolute; bottom:45px; }

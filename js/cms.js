@@ -116,7 +116,7 @@ CMS = {
                         for ( var i = 0; i < userList.length; i++ ) {
                             sidebarContent += '<span data="' + userList[i].code_author + '">' + userList[i].code_author + '</span>';
                         }
-                        sidebarContent += '</div>';
+                        sidebarContent += '<span class="other"><input class="inputText" type="text" placeholder="其他" /></span></div>';
                         $(sidebarContent).appendTo($('.sidebar'));
                         $('.languageList span').click(function() {
                             $('.languageList span').removeClass('on');
@@ -149,7 +149,7 @@ CMS = {
                     codeList = '<div class="codeList"><i class="stars"></i><h3>' + data[i].code_title + '</h3><h4>' + data[i].code_summary + '</h4><p>' + data[i].code_description.substr(0, 70).replace(/<[^>]*>/g, ' ') + '<span class="googleYellow">' + data[i].code_description.substr(0, 10).replace(/<[^>]*>/g, ' ') + '</span>' + data[i].code_description.substr(70, 70).replace(/<[^>]*>/g, ' ') + '...</p></div>';
                     (function(i) {
                         $(codeList).click(function() {
-                            codePage = '<div class="codePage"><i class="close">X</i>' + data[i].code_description + '<div class="comment"><ol><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li></ol></div></div>';
+                            codePage = '<div class="codePage"><i class="close">X</i>' + data[i].code_description + '<div class="comment"><ol><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li><li><textarea class="inputText"></textarea><input class="inputButton" type="button" value="评论" /></li></ol></div></div>';
                             $('.codePage').remove();
                             $(codePage).appendTo($('.main'));
                             $('.codePage').width($('.codeList').width() - 200);
