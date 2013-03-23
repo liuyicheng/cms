@@ -91,7 +91,7 @@ CMS = {
             });
         },
         initSearch: function() {
-            $('#searchInput').width($('.center').width() - 354);
+            $('#searchInput').width($('.center').width() - 334);
         },
         initSidebar: function() {
             var languageList,
@@ -146,13 +146,17 @@ CMS = {
                 var codeList,
                     codePage;
                 for ( var i = 0; i < data.length; i++ ) {
-                    codeList = '<div class="codeList"><h3>' + data[i].code_title + '</h3><h4>' + data[i].code_summary + '</h4><p>' + data[i].code_description.substr(0, 140).replace(/<[^>]*>/g, ' ') + '...</p></div>';
+                    codeList = '<div class="codeList"><i class="stars"></i><h3>' + data[i].code_title + '</h3><h4>' + data[i].code_summary + '</h4><p>' + data[i].code_description.substr(0, 70).replace(/<[^>]*>/g, ' ') + '<span class="googleYellow">' + data[i].code_description.substr(0, 10).replace(/<[^>]*>/g, ' ') + '</span>' + data[i].code_description.substr(70, 70).replace(/<[^>]*>/g, ' ') + '...</p></div>';
                     (function(i) {
                         $(codeList).click(function() {
-                            codePage = '<div class="codePage">' + data[i].code_description + '</div>';
+                            codePage = '<div class="codePage"><i class="close">X</i>' + data[i].code_description + '<div class="comment"><ol><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li></ol></div></div>';
                             $('.codePage').remove();
                             $(codePage).appendTo($('.main'));
-                            $('.codePage').width($('.codeList').width() - 250);
+                            $('.codePage').width($('.codeList').width() - 200);
+                            $('.codePage .close').click(function() {
+                                $(this).parents('.codePage').remove();
+                                $('.codeList').removeClass('on');
+                            });
                             if ( !$('#jquerySnippetCss').length ) {
                                 $("<link/>", {
                                     id: "jquerySnippetCss",

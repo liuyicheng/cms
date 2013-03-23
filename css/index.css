@@ -1,6 +1,6 @@
 #pg_index .inputButton { margin-left:0; }
 
-#pg_index .sidebar { float:left; width:150px; margin-left:20px; }
+#pg_index .sidebar { float:left; width:130px; margin-left:20px; }
 #pg_index .sidebar h2 { font-size:18px; margin:20px 0 5px 0; }
 #pg_index .sidebar .languageList h2 { margin-top:0; }
 #pg_index .sidebar span { font-size:14px; display:block; padding:5px; color:#666; cursor:pointer; }
@@ -8,17 +8,17 @@
 #pg_index .sidebar span.on:hover { background-color:#fff; }
 #pg_index .sidebar span.on { background-color:#ccc; color:#333; }
 
-#pg_index .search { margin-left:200px; }
+#pg_index .search { margin-left:180px; }
 #pg_index .search .inputText { margin-right:30px; }
 
-#pg_index .main { position:relative; margin:30px 20px 20px 200px; padding:0; background-color:#f2f2f2; width:auto; }
+#pg_index .main { position:relative; margin:30px 20px 20px 180px; padding:0; background-color:#f2f2f2; width:auto; }
 #pg_index .codeList { position:relative; padding:20px 30px; cursor:pointer; height:80px; border:1px solid #ccc; border-top:0; }
 #pg_index .codeList:first-child { border-top:1px solid #ccc; }
 #pg_index .codeList:hover { background-color:#fff; box-shadow:0 0 10px rgba(0, 0, 0, 0.1); }
 #pg_index .codeList.on { background-color:#fff; }
 #pg_index .codeList.on:hover { background-color:#fff; box-shadow:none; }
-#pg_index .codeList.on:before { content:""; width:251px; position:absolute; height:122px; background:rgba(0, 0, 0, 0); top:-1px; left:-1px; box-shadow:0 0 10px rgba(0, 0, 0, 0.3); }
-#pg_index .codeList.on:after { content:""; width:20px; position:absolute; height:120px; background-color:#fff; top:0; left:240px; z-index:10; }
+#pg_index .codeList.on:before { content:""; width:201px; position:absolute; height:122px; background:rgba(0, 0, 0, 0); top:-1px; left:-1px; box-shadow:0 0 10px rgba(0, 0, 0, 0.3); }
+#pg_index .codeList.on:after { content:""; width:20px; position:absolute; height:120px; background-color:#fff; top:0; left:190px; z-index:10; }
 #pg_index .codeList h3 { display:inline; font-size:20px; color:#fa4a33; }
 #pg_index .codeList h4 { display:inline; margin-left:20px; color:#666; }
 #pg_index .codeList p { margin:10px 0 0; font-size:14px; color:#666; margin-right:180px; }
@@ -28,8 +28,18 @@
 #pg_index .codeList:hover h4,
 #pg_index .codeList.on p,
 #pg_index .codeList:hover p { color:#333; }
+#pg_index .codeList .stars { position:absolute; display:block; top:20px; right:20px; width:75px; height:14px; background:url("img/stars.gif") no-repeat; }
 
 #pg_index .codePage { background:#fff; position:absolute; top:0; right:0; padding:20px 30px; border:1px solid #ccc; box-shadow:0 0 10px rgba(0, 0, 0, 0.3); }
 #pg_index .codePage h5 { font-size:24px; margin:10px 0; }
 #pg_index .codePage h6 { font-size:20px; margin-top:20px; }
 #pg_index .codePage p { margin:10px 0; text-indent:2em; }
+#pg_index .codePage i { font-style:normal; display:block; position:absolute; top:0; right:0; width:30px; height:30px; text-align:center; font-size:24px; line-height:30px; font-weight:bold; cursor:pointer; color:#666; }
+#pg_index .codePage i:hover { background-color:#fa4a33; color:#fff; }
+
+#pg_index .codePage .comment { margin-top:50px; }
+#pg_index .codePage .comment h5 { font-size:14px; font-weight:normal; color:#143d98; }
+#pg_index .codePage .comment h5:hover { text-decoration:underline; }
+#pg_index .codePage .comment p { font-size:14px; text-indent:0; }
+#pg_index .codePage .comment .time { display:block; color:#999; font-size:12px; }
+#pg_index .codePage .comment li { margin:20px 0; }
