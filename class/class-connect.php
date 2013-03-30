@@ -50,11 +50,20 @@ class Connect {
      * 说明: 可以设置过滤器，默认为所有代码按时间排序结果，最多只返回30条结果
      *       TODO 过滤器部分还没做好
      */
-    public function getCodeList($language, $project, $author, $keywords) {
+    public function getCodeList($label, $language, $project, $author, $keywords) {
         $mysql = $this->mysql;
-        $query = "select code_ID, code_title, code_language, code_project, code_author, code_summary, code_description from cms_code ";
+        $query = "select code_ID, code_title, code_language, code_project, code_author, code_updatetime, code_summary, code_description ";
+        if ( $label ) {
+            $query .= " , label_codeid, label_content from cms_code inner join cms_label on code_ID=label_codeid where label_content = '" . $label . "' ";
+        } else {
+            $query .= " from cms_code ";
+        }
         if ( $language || $project || $author || $keywords ) {
-            $query .= " where ";
+            if ( !$label ) {
+                $query .= " where ";
+            } else {
+                $query .= " and ";
+            }
             if ( $language ) {
                 $query .= " code_language = '" . $language . "' ";
             }
@@ -82,14 +91,11 @@ class Connect {
         return json_encode($mysql->fetchall($result));
     }
     /**
-     * 方法: getUserList
-     * 功能: 获取用户列表
-     * 参数: 无
-     * 说明: 返回所有用户的user_nickname
+     * getLabelList
      */
-    public function getUserList() {
+    public function getLabelList() {
         $mysql = $this->mysql;
-        $result = $mysql->query("select code_author from cms_code group by code_author");
+        $result = $mysql->query("select label_content from cms_label group by label_content");
         return json_encode($mysql->fetchall($result));
     }
     /**
@@ -97,7 +103,6 @@ class Connect {
      * 功能: 获取语言列表
      * 参数: 无
      * 说明: 返回代码语言的列表
-     *       TODO 目前语言没有另外建表，是查询的已有代码库中的语言，考虑是否需要给语言建表
      */
     public function getLanguageList() {
         $mysql = $this->mysql;
@@ -116,16 +121,35 @@ class Connect {
         return json_encode($mysql->fetchall($result));
     }
     /**
+     * 方法: getUserList
+     * 功能: 获取用户列表
+     * 参数: 无
+     * 说明: 返回所有用户的user_nickname
+     */
+    public function getUserList() {
+        $mysql = $this->mysql;
+        $result = $mysql->query("select code_author from cms_code group by code_author");
+        return json_encode($mysql->fetchall($result));
+    }
+    /**
      * 方法: getCodePage
      * 功能: 获取代码页面
      * 参数: $code_ID
      * 说明: 返回特定code_ID的代码页面需要的数据
-     *       TODO 目前返回的信息还不完善，不包括project_title和评论
+     *       TODO 目前返回的信息还不完善，不包括评论
      */
     public function getCodePage($code_ID) {
         $mysql = $this->mysql;
         $result = $mysql->query("select * from cms_code where code_ID = '$code_ID'");
         return json_encode($mysql->fetcharray($result));
+    }
+    /**
+     * getCodeLabel
+     */
+    public function getCodeLabel($code_ID) {
+        $mysql = $this->mysql;
+        $result = $mysql->query("select label_codeid, label_content from cms_label where label_codeid = '$code_ID'");
+        return json_encode($mysql->fetchall($result));
     }
     /**
      * 方法: addCodePage

@@ -12,6 +12,7 @@ $(function() {
         CMS.filter.keywords = $('#searchInput').val();
         CMS.init.initMain();
     });
+    $('.other .inputText').autocomplete({ source: [ "c++", "java", "php", "coldfusion", "javascript", "asp", "ruby" ] });
     CMS.init.initSearch();
     CMS.init.initSidebar();
     CMS.init.initMain();

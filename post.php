@@ -29,14 +29,18 @@ if ( isset($_POST["type"]) ) {
             echo json_encode(array("status" => "success"));
         break;
         case "getCodeList":
+            $label = isset($_POST["label"]) ? $_POST["label"] : "";
             $language = isset($_POST["language"]) ? $_POST["language"] : "";
             $project = isset($_POST["project"]) ? $_POST["project"] : "";
             $author = isset($_POST["author"]) ? $_POST["author"] : "";
             $keywords = isset($_POST["keywords"]) ? $_POST["keywords"] : "";
-            echo $connect->getCodeList($language, $project, $author, $keywords);
+            echo $connect->getCodeList($label, $language, $project, $author, $keywords);
         break;
         case "getUserList":
             echo $connect->getUserList();
+        break;
+        case "getLabelList":
+            echo $connect->getLabelList();
         break;
         case "getLanguageList":
             echo $connect->getLanguageList();
@@ -44,12 +48,16 @@ if ( isset($_POST["type"]) ) {
         case "getProjectList":
             echo $connect->getProjectList();
         break;
-        // TODO 如此多的相似代码，考虑是否可以合并，Do not repeat yourself!
         case "getCodePage":
             $code_ID = isset($_POST["code_ID"]) ? $_POST["code_ID"] : "";
             echo $connect->getCodePage($code_ID);
             // TODO 显示代码页面还没做完
         break;
+        case "getCodeLabel":
+            $code_ID = isset($_POST["code_ID"]) ? $_POST["code_ID"] : "";
+            echo $connect->getCodeLabel($code_ID);
+        break;
+        // TODO 如此多的相似代码，考虑是否可以合并，Do not repeat yourself!
         case "addCodePage":
             $code_title = isset($_POST["code_title"]) ? $_POST["code_title"] : "";
             $code_project = isset($_POST["code_project"]) ? $_POST["code_project"] : "";
