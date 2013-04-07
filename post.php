@@ -8,6 +8,19 @@ if ( isset($_POST["type"]) ) {
     $postType = $_POST["type"];
     $connect = new Connect();
     switch ( $postType ) {
+        case "signUp":
+            $account = isset($_POST["account"]) ? $_POST["account"] : "";
+            $password = isset($_POST["password"]) ? $_POST["password"] : "";
+            $nickname = isset($_POST["nickname"]) ? $_POST["nickname"] : "";
+            $email = isset($_POST["email"]) ? $_POST["email"] : "";
+            $phonenum = isset($_POST["phonenum"]) ? $_POST["phonenum"] : "";
+            $result = $connect->signUp($account, $password, $nickname, $email, $phonenum);
+            if ( $result == "success" ) {
+                echo json_encode(array("status" => "success"));
+            } else {
+                echo $result;
+            }
+        break;
         case "signIn":
             $account = isset($_POST["account"]) ? $_POST["account"] : "";
             $password = isset($_POST["password"]) ? $_POST["password"] : "";
@@ -62,11 +75,12 @@ if ( isset($_POST["type"]) ) {
             $code_title = isset($_POST["code_title"]) ? $_POST["code_title"] : "";
             $code_project = isset($_POST["code_project"]) ? $_POST["code_project"] : "";
             $code_language = isset($_POST["code_language"]) ? $_POST["code_language"] : "";
+            $code_label = isset($_POST["code_label"]) ? $_POST["code_label"] : "";
             $code_summary = isset($_POST["code_summary"]) ? $_POST["code_summary"] : "";
             $code_location = isset($_POST["code_location"]) ? $_POST["code_location"] : "";
             $code_source = isset($_POST["code_source"]) ? $_POST["code_source"] : "";
             $code_description = isset($_POST["code_description"]) ? $_POST["code_description"] : "";
-            echo $connect->addCodePage($code_title, $code_project, $code_language, $code_summary, $code_location, $code_source, $code_description);
+            echo $connect->addCodePage($code_title, $code_project, $code_language, $code_label, $code_summary, $code_location, $code_source, $code_description);
         break;
     }
 }

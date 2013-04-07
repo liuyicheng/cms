@@ -1,4 +1,3 @@
-<input id="returnIndex" class="extendButton" type="button" value="返回" />
 <form id="editForm" action="" method="post" >
     <div class="formRow">
         <label for="title">标题（函数名或类名）：</label>
@@ -13,6 +12,11 @@
     <div class="formRow">
         <label for="language">开发语言：</label>
         <input id="language" name="language" type="text" placeholder="开发语言" />
+        <span class="formMsg googleRed"></span>
+    </div>
+    <div class="formRow">
+        <label for="label">标签（空格分开）：</label>
+        <input id="label" name="label" type="text" placeholder="标签（空格分开）" />
         <span class="formMsg googleRed"></span>
     </div>
     <div class="formRow">
@@ -32,7 +36,7 @@
     <div class="formRow">
         <label for="description">正文（介绍，例子等）：</label>
         <div class="description">
-            <script  id="editor" type="text/plain">应该包括：<ol><li>详细介绍（输入输出）</li><li>示例</li><li>注意事项</li></ol></script>
+            <script  id="editor" type="text/plain">应该包括：<ol><li>详细介绍（输入输出）</li><li>示例代码</li><li>注意事项</li></ol><p>标题使用h5,h6标签</p></script>
         </div>
     </div>
     <div class="formRow">

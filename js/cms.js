@@ -11,7 +11,7 @@ CMS = {
     },
     sign: {
         postSignIn: function($signInForm) {
-            var account = $signInForm.find('#account').val();
+            var account = $signInForm.find('#account').val(),
                 password = $signInForm.find('#password').val();
             $.post("post.php", {
                 'type': 'signIn',
@@ -22,6 +22,28 @@ CMS = {
                     window.location.href = 'index.php';
                 } else {
                     CMS.form.showFormMsg($signInForm, data);
+                }
+            }, 'json');
+        },
+        postSignUp: function($signUpForm) {
+            var account = $signUpForm.find('#account').val(),
+                password = $signUpForm.find('#password').val(),
+                nickname = $signUpForm.find('#nickname').val(),
+                email = $signUpForm.find('#email').val(),
+                phonenum = $signUpForm.find('#phonenum').val();
+            $.post("post.php", {
+                'type': 'signUp',
+                'account': account,
+                'password': password,
+                'nickname': nickname,
+                'email': email,
+                'phonenum': phonenum
+            }, function(data) {
+                if (data.status === 'success') {
+                    alert('success');
+                    window.location.href = 'sign.php';
+                } else {
+                    CMS.form.showFormMsg($signUpForm, data);
                 }
             }, 'json');
         },
@@ -88,6 +110,7 @@ CMS = {
                 code_title: addNewData.title,
                 code_project: addNewData.project,
                 code_language: addNewData.language,
+                code_label: addNewData.label,
                 code_summary: addNewData.summary,
                 code_location: addNewData.location,
                 code_source: addNewData.source,
@@ -104,7 +127,7 @@ CMS = {
             });
         },
         initSearch: function() {
-            $('#searchInput').width($('.center').width() - 334);
+            $('#searchInput').width($('.center').width() - 494);
         },
         initSidebar: function() {
             var labelList,

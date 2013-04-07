@@ -1,3 +1,7 @@
+#returnIndex,
+#addNewCodeButton,
+#signOut { display:none; }
+
 #pg_sign,
 #pg_sign body { width:100%; height:100%; }
 #pg_sign h1 { text-align:center; }

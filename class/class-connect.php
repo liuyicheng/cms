@@ -43,6 +43,29 @@ class Connect {
             }
         }
     }
+    public function signUp($account, $password, $nickname, $email, $phonenum) {
+        if ( !$account ) {
+            return json_encode(array("account" => "请输入帐号"));
+        } else if ( !$password ) {
+            return json_encode(array("password" => "请输入密码"));
+        } else if ( !$nickname ) {
+            return json_encode(array("nickname" => "请输入昵称"));
+        } else if ( !$email) {
+            return json_encode(array("email" => "请输入邮箱"));
+        } else if ( !$phonenum) {
+            return json_encode(array("phonenum" => "请输入电话"));
+        } else {
+            $mysql = $this->mysql;
+            $password = md5($password);
+            $result = $mysql->query("select user_account from cms_user where user_account = '$account'");
+            if ( $mysql->fetcharray($result) ) {
+                return json_encode(array("account" => "帐号已存在"));
+            } else {
+                $result = $mysql->query("insert into cms_user (user_account, user_password, user_nickname, user_email, user_phonenum) values ('$account', '$password', '$nickname', '$email', '$phonenum')");
+                return 'success';
+            }
+        }
+    }
     /**
      * 方法: getCodeList
      * 功能: 获取代码查询结果列表
@@ -158,12 +181,21 @@ class Connect {
      * 说明: 将数据插入cms_code表
      *       TODO 临时写的，还需修改
      */
-    public function addCodePage($code_title, $code_project, $code_language, $code_summary, $code_location, $code_source, $code_description) {
-        $code_source = addslashes($code_source);
-        $code_description = htmlentities($code_description);
+    public function addCodePage($code_title, $code_project, $code_language, $code_label, $code_summary, $code_location, $code_source, $code_description) {
         $mysql = $this->mysql;
-        //return $mysql->query("insert into cms_code (code_title, code_projectid, code_language, code_summary, code_location, code_authorid, code_source, code_description) values ('$code_title', '1', '$code_language', '$code_summary', '$code_location', '1', '$code_source', '$code_description')");
-        return $mysql->query("insert into cms_code (code_title, code_projectid, code_language, code_summary, code_location, code_authorid, code_source, code_description) values ('$code_title', '1', '$code_language', '$code_summary', '$code_location', '1', '$code_source', '$code_description')");
+        $code_source = addslashes($code_source);
+        $code_updatetime = date("Y-m-d H:i:s",time());
+        session_start();
+        $user_ID = $_SESSION["user_ID"];
+        $user_nickname = $mysql->fetcharray($mysql->query("select user_nickname from cms_user where user_ID='$user_ID'"));
+        $user_nickname = $user_nickname["user_nickname"];
+        $mysql->query("insert into cms_code (code_title, code_project, code_language, code_summary, code_location, code_updatetime, code_author, code_source, code_description) values ('$code_title', '$code_project', '$code_language', '$code_summary', '$code_location', '$code_updatetime', '$user_nickname', '$code_source', '$code_description')");
+        $insertid = $mysql->insertid();
+        $label_list = explode(" ", $code_label);
+        for ( $i = 0; $i < count($label_list); $i++ ) {
+            $mysql->query("insert into cms_label (label_codeid, label_content) values ('$insertid', '$label_list[$i]')");
+        }
+        return "success";
     }
     /**
      * 方法: __destruct
