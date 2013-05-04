@@ -111,7 +111,11 @@ class Connect {
         }
         $query .= " order by code_updatetime desc limit 0, 10";
         $result = $mysql->query($query);
-        return json_encode($mysql->fetchall($result));
+        $codeList = $mysql->fetchall($result);
+        for ($i = 0; $i < count($codeList); $i++) {
+            $codeList[$i]["label_list"] = self::getCodeLabel($codeList[$i]["code_ID"]);
+        }
+        return json_encode($codeList);
     }
     /**
      * getLabelList
@@ -172,7 +176,7 @@ class Connect {
     public function getCodeLabel($code_ID) {
         $mysql = $this->mysql;
         $result = $mysql->query("select label_codeid, label_content from cms_label where label_codeid = '$code_ID'");
-        return json_encode($mysql->fetchall($result));
+        return $mysql->fetchall($result);
     }
     /**
      * 方法: addCodePage

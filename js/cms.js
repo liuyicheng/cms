@@ -196,46 +196,45 @@ CMS = {
                 var codeList,
                     codePage,
                     codeListData = data;
+                    console.log(data);
                 for ( var i = 0; i < codeListData.length; i++ ) {
                     (function(i) {
-                        CMS.getData.getCodeLabel(codeListData[i].code_ID, function(data) {
-                            codeList = '<div class="codeList"><div class="codeMessage"><span>开发语言： ' + codeListData[i].code_language + '</span><span>所属项目： ' + codeListData[i].code_project + '</span><span>上传作者： ' + codeListData[i].code_author + '</span><span>' + codeListData[i].code_updatetime + '</span><i class="stars"></i></div>';
-                            codeList += '<h3>' + codeListData[i].code_title + '</h3><h4>' + codeListData[i].code_summary + '</h4><p>' + codeListData[i].code_description.substr(0, 140).replace(/<[^>]*>/g, ' ') + '...</p>';
-                            if ( data.length > 0 ) {
-                                codeList += '<p class="codeLabel">';
-                                for ( var j = 0; j < data.length; j++ ) {
-                                    codeList += '<span>' + data[j].label_content + '</span>';
-                                }
-                                codeList += '</p>';
+                        codeList = '<div class="codeList"><div class="codeMessage"><span>开发语言： ' + codeListData[i].code_language + '</span><span>所属项目： ' + codeListData[i].code_project + '</span><span>上传作者： ' + codeListData[i].code_author + '</span><span>' + codeListData[i].code_updatetime + '</span><i class="stars"></i></div>';
+                        codeList += '<h3>' + codeListData[i].code_title + '</h3><h4>' + codeListData[i].code_summary + '</h4><p>' + codeListData[i].code_description.substr(0, 140).replace(/<[^>]*>/g, ' ') + '...</p>';
+                        if ( codeListData[i].label_list.length > 0 ) {
+                            codeList += '<p class="codeLabel">';
+                            for ( var j = 0; j < codeListData[i].label_list.length; j++ ) {
+                                codeList += '<span>' + codeListData[i].label_list[j].label_content + '</span>';
                             }
-                            codeList += '</div>';
-                            $(codeList).click(function() {
-                                codePage = '<div class="codePage"><i class="close">X</i>' + codeListData[i].code_description + '<div class="comment"><ol><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li><li><textarea class="inputText"></textarea><input class="inputButton" type="button" value="评论" /></li></ol></div></div>';
-                                $('.codePage').remove();
-                                $(codePage).appendTo($('.main'));
-                                $('.codePage').width($('.codeList').width() - 200);
-                                $('.codePage .close').click(function() {
-                                    $(this).parents('.codePage').remove();
-                                    $('.codeList').removeClass('on');
-                                });
-                                if ( !$('#jquerySnippetCss').length ) {
-                                    $("<link/>", {
-                                        id: "jquerySnippetCss",
-                                        rel: "stylesheet",
-                                        type: "text/css",
-                                        href: "css/jquery.snippet.min.css"
-                                    }).appendTo("head");
-                                }
-                                if ( !$('#jquerySnippetJs').length ) {
-                                    $.getScript('js/jquery.snippet.min.js', function() {
-                                        $('pre').snippet('javascript', { style: 'vim', menu: false });
-                                        $('.center').height(Math.max($('.main').height(), ($('.codePage').height() + 170)));
-                                    });
-                                }
+                            codeList += '</p>';
+                        }
+                        codeList += '</div>';
+                        $(codeList).click(function() {
+                            codePage = '<div class="codePage"><i class="close">X</i>' + codeListData[i].code_description + '<div class="comment"><ol><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li><li><h5>流浪小猫：</h5><p>这个真好用呀。这个真好用呀。这个真好用呀。这个真好用呀。</p><span class="time">2013-3-19 12:12:04</span></li><li><textarea class="inputText"></textarea><input class="inputButton" type="button" value="评论" /></li></ol></div></div>';
+                            $('.codePage').remove();
+                            $(codePage).appendTo($('.main'));
+                            $('.codePage').width($('.codeList').width() - 200);
+                            $('.codePage .close').click(function() {
+                                $(this).parents('.codePage').remove();
                                 $('.codeList').removeClass('on');
-                                $(this).addClass('on');
-                            }).appendTo($('.main'));
-                        });
+                            });
+                            if ( !$('#jquerySnippetCss').length ) {
+                                $("<link/>", {
+                                    id: "jquerySnippetCss",
+                                    rel: "stylesheet",
+                                    type: "text/css",
+                                    href: "css/jquery.snippet.min.css"
+                                }).appendTo("head");
+                            }
+                            if ( !$('#jquerySnippetJs').length ) {
+                                $.getScript('js/jquery.snippet.min.js', function() {
+                                    $('pre').snippet('javascript', { style: 'vim', menu: false });
+                                    $('.center').height(Math.max($('.main').height(), ($('.codePage').height() + 170)));
+                                });
+                            }
+                            $('.codeList').removeClass('on');
+                            $(this).addClass('on');
+                        }).appendTo($('.main'));
                     })(i);
                 }
             });
